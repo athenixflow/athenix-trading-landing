@@ -11,6 +11,7 @@ import {
   Image,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import {
   Brain,
@@ -233,6 +234,12 @@ function FeatureCard({
 }
 
 function FeaturesSection() {
+  const router = useRouter();
+
+  const handleLearnMore = () => {
+    router.push("/features");
+  };
+
   return (
     <View style={styles.section}>
       <Text style={styles.sectionTitle}>What Makes Athenix Different</Text>
@@ -255,6 +262,9 @@ function FeaturesSection() {
           description="Each question and trade refines Athenix's intelligence, making it your personal, evolving market strategist."
           delay={400}
         />
+      </View>
+      <View style={styles.learnMoreContainer}>
+        <Button text="Learn How to Use Features" onPress={handleLearnMore} variant="secondary" />
       </View>
     </View>
   );
@@ -1006,5 +1016,9 @@ const styles = StyleSheet.create({
     color: COLORS.charcoal,
     lineHeight: isMobile ? 24 : 28,
     opacity: 0.8,
+  },
+  learnMoreContainer: {
+    marginTop: 40,
+    alignItems: "center",
   },
 });

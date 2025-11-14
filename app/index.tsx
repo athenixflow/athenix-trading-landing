@@ -8,6 +8,7 @@ import {
   Animated,
   Dimensions,
   Linking,
+  Image,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
@@ -16,7 +17,6 @@ import {
   BookOpen,
   TrendingUp,
   ChevronDown,
-  Sparkles,
 } from "lucide-react-native";
 
 const COLORS = {
@@ -27,6 +27,8 @@ const COLORS = {
   goldLight: "#D4B566",
   goldDark: "#B08F3A",
 };
+
+const ATHENIX_LOGO_URL = "https://pub-e001eb4506b145aa938b5d3badbff6a5.r2.dev/attachments/xcz35k558ht0y522dai0f";
 
 const { width } = Dimensions.get("window");
 const isMobile = width < 768;
@@ -151,9 +153,11 @@ function HeroSection() {
               { transform: [{ scale: pulseAnim }] },
             ]}
           >
-            <View style={styles.logoPlaceholder}>
-              <Sparkles size={isMobile ? 48 : 64} color={COLORS.gold} />
-            </View>
+            <Image
+              source={{ uri: ATHENIX_LOGO_URL }}
+              style={styles.heroLogo}
+              resizeMode="contain"
+            />
           </Animated.View>
 
           <Text style={styles.heroTitle}>Trade Smarter with Athenix</Text>
@@ -517,9 +521,11 @@ function Footer({ onLinkPress }: { onLinkPress: (section: string) => void }) {
     <View style={styles.footer}>
       <View style={styles.footerContent}>
         <View style={styles.footerLogoContainer}>
-          <View style={styles.footerLogo}>
-            <Sparkles size={40} color={COLORS.gold} />
-          </View>
+          <Image
+            source={{ uri: ATHENIX_LOGO_URL }}
+            style={styles.footerLogo}
+            resizeMode="contain"
+          />
         </View>
 
         <View style={styles.footerColumns}>
@@ -676,18 +682,13 @@ const styles = StyleSheet.create({
   logoContainer: {
     marginBottom: 40,
   },
-  logoPlaceholder: {
+  heroLogo: {
     width: isMobile ? 120 : 160,
     height: isMobile ? 120 : 160,
-    borderRadius: isMobile ? 60 : 80,
-    backgroundColor: COLORS.white,
-    alignItems: "center",
-    justifyContent: "center",
     shadowColor: COLORS.gold,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 20,
-    elevation: 10,
   },
   heroTitle: {
     fontSize: isMobile ? 36 : isTablet ? 48 : 64,
@@ -945,12 +946,6 @@ const styles = StyleSheet.create({
   footerLogo: {
     width: 80,
     height: 80,
-    borderRadius: 40,
-    backgroundColor: COLORS.charcoal,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 2,
-    borderColor: COLORS.gold,
   },
   footerColumns: {
     flexDirection: isMobile ? "column" : "row",
